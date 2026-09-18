@@ -1,5 +1,5 @@
-const KEY='recovery-v2-state-v7';
-const seed={version:7,weight:201,goal:163,calorieGoal:1750,proteinGoal:120,fasting:false,selectedDay:4,floor:{walk:false,strength:false,water:false,sleep:false},notes:'',training:[],weights:[{date:'2026-09-17',value:201}],meals:[
+const KEY='recovery-v2-state-v9';
+const seed={version:9,weight:200.8,goal:163,calorieGoal:1750,proteinGoal:120,fasting:false,selectedDay:4,floor:{walk:false,strength:false,water:false,sleep:false},notes:'',training:[],weights:[{date:'2026-09-14',value:205},{date:'2026-09-18',value:200.8}],meals:[
 {id:101,day:1,name:'Protein bread + turkey',detail:'2 slices ALDI protein bread, about 5 slices turkey, lots of lettuce/salad.',kcal:330,protein:34,confidence:'estimate'},
 {id:102,day:1,name:'Injera + tibs dinner',detail:'Injera, beef/tibs, shredded lettuce salad with cucumber and onion, 2 tbsp cottage cheese, small doro wot, awaze, water.',kcal:760,protein:43,confidence:'estimate'},
 {id:201,day:2,name:'Zucchini + leftovers',detail:'1 whole zucchini, leftover tibs/beef, 1 drumstick and couscous.',kcal:560,protein:40,confidence:'estimate'},
@@ -30,6 +30,7 @@ function render(){
  const now=Date.now(),week=state.training.filter(x=>now-new Date(x.date+'T00:00:00').getTime()<7*86400000);$('#weekWorkouts').textContent=week.length;$('#weekMinutes').textContent=week.reduce((n,x)=>n+(+x.mins||0),0);$('#notes').value=state.notes||'';document.querySelectorAll('[data-floor]').forEach(b=>b.classList.toggle('done',!!state.floor[b.dataset.floor]));
 }
 window.showView=(v,el)=>{document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$('#'+v+'View').classList.add('active');document.querySelectorAll('.navin span').forEach(x=>x.classList.remove('active'));el.classList.add('active');render()}
+window.quickMeal=k=>{const q={tuna:{name:'Tuna crunch bowl',detail:'Tuna in water, large salad, tomato, cucumber, light dressing',kcal:350,protein:35},chicken:{name:'Chicken + vegetables',detail:'Chicken breast, vegetables, salad and a controlled starch portion',kcal:500,protein:45},fasting:{name:'Fasting protein bowl',detail:'Tofu, lentils, vegetables, tomato, spices and measured oil',kcal:500,protein:30},sub:{name:'Homemade tuna sub',detail:'Multigrain bread, tuna, light mayo, cottage cheese, tomato and salad',kcal:575,protein:40}}[k];state.meals.push({id:Date.now(),day:state.selectedDay,...q,confidence:'estimate'});save();render()}
 window.selectDay=d=>{state.selectedDay=d;save();render()}
 window.toggleFloor=k=>{state.floor[k]=!state.floor[k];save();render()}
 window.toggleFast=()=>{state.fasting=!state.fasting;save();render()}
@@ -39,5 +40,5 @@ window.addMeal=()=>{const name=prompt('Meal');if(!name)return;const detail=promp
 window.logWeight=()=>{const v=Number(prompt('Current weight (lb)',state.weight));if(!v)return;state.weight=v;state.weights.push({date:today(),value:v});save();render()}
 window.logTraining=type=>{const mins=Number(prompt(type+' minutes',10)||0);if(!mins)return;state.training.push({id:Date.now(),date:today(),type,mins});save();render()}
 window.exportData=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='recovery-data.json';a.click()}
-window.importData=()=>{const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=()=>{const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.meals||!x.weights)throw 0;state=x;state.version=7;save();render();alert('Data imported')}catch(e){alert('That backup could not be read')}};r.readAsText(i.files[0])};i.click()}
+window.importData=()=>{const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=()=>{const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.meals||!x.weights)throw 0;state=x;state.version=9;save();render();alert('Data imported')}catch(e){alert('That backup could not be read')}};r.readAsText(i.files[0])};i.click()}
 render();
