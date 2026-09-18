@@ -1,4 +1,4 @@
-const KEY='recovery-v2-state';
+const KEY='recovery-v2-state-v5';
 const seed={version:4,weight:201,goal:163,calorieGoal:1750,proteinGoal:120,fasting:false,selectedDay:4,floor:{walk:false,strength:false,water:false,sleep:false},weights:[{date:'2026-09-17',value:201}],meals:[
 {id:101,day:1,name:'Protein bread + turkey',detail:'2 slices ALDI protein bread, about 5 slices turkey, lots of lettuce/salad.',kcal:330,protein:34,confidence:'estimate'},
 {id:102,day:1,name:'Injera + tibs dinner',detail:'Injera, beef/tibs, shredded lettuce salad with cucumber and onion, 2 tbsp cottage cheese, small doro wot, awaze, water.',kcal:760,protein:43,confidence:'estimate'},
