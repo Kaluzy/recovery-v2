@@ -22,6 +22,9 @@ function render(){
  $('#daytabs').innerHTML=[1,2,3,4].map(d=>`<button class="daytab ${d===state.selectedDay?'active':''}" onclick="selectDay(${d})">Day ${d}</button>`).join('');
  $('#daytotal').textContent=`Day ${state.selectedDay} · ~${t.kcal} kcal · ~${t.protein}g protein`;
  $('#meals').innerHTML=dayMeals().map(m=>`<div class="meal"><div class="meal-icon">🍽️</div><div class="grow"><strong>${m.name}</strong><span class="sub">${m.detail}</span><span class="tag">~${m.kcal} kcal · ~${m.protein}g protein · ${m.confidence}</span></div><button class="ghost" onclick="removeMeal(${m.id})">×</button></div>`).join('');
+ const all=totals(state.meals), avgK=Math.round(all.kcal/4), avgP=Math.round(all.protein/4);
+ $('#summary').innerHTML='<div class="big">~'+avgK+' kcal/day</div><div class="sub">~'+avgP+'g protein/day average · '+state.meals.length+' logged meals</div>';
+ $('#weightHistory').innerHTML=state.weights.slice().reverse().map(w=>'<div class="meal"><div class="grow"><strong>'+w.value+' lb</strong><span class="sub">'+w.date+'</span></div></div>').join('')||'<span class="sub">No weight entries yet.</span>';
  document.querySelectorAll('[data-floor]').forEach(b=>b.classList.toggle('done',!!state.floor[b.dataset.floor]));
 }
 window.selectDay=d=>{state.selectedDay=d;save();render()}
