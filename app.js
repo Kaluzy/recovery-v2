@@ -1,15 +1,12 @@
 const KEY='recovery-v2-state';
-const seed={weight:201,goal:163,calorieGoal:1750,proteinGoal:120,water:3,fasting:false,floor:{light:false,walk:false,protein:false,alcohol:true,wind:false},meals:[
-{id:1,name:'Legume bowl + sardines',detail:'Chickpea pasta, lentils, vegetables, grain and sardines',kcal:620,protein:42,confidence:'estimate'},
-{id:2,name:'Homemade tuna sub',detail:'Whole-grain toast, tuna, light mayo, cottage cheese, tomato + chopped salad',kcal:575,protein:40,confidence:'estimate'}],
-weights:[{date:'2026-09-17',value:201}]};
+const seed={weight:0,goal:0,calorieGoal:0,proteinGoal:0,water:0,fasting:false,floor:{light:false,walk:false,protein:false,alcohol:false,wind:false},meals:[],weights:[]};
 let state=JSON.parse(localStorage.getItem(KEY)||'null')||seed;
 const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
 const $=s=>document.querySelector(s);
 function totals(){return state.meals.reduce((a,m)=>({kcal:a.kcal+(+m.kcal||0),protein:a.protein+(+m.protein||0)}),{kcal:0,protein:0})}
 function render(){
- const t=totals(); $('#weight').textContent=state.weight+' lb'; $('#calories').textContent='~'+t.kcal.toLocaleString(); $('#protein').textContent='~'+t.protein+'g';
- $('#calBar').style.width=Math.min(100,t.kcal/state.calorieGoal*100)+'%'; $('#proBar').style.width=Math.min(100,t.protein/state.proteinGoal*100)+'%';
+ const t=totals(); $('#weight').textContent=state.weight?state.weight+' lb':'Not logged'; $('#calories').textContent='~'+t.kcal.toLocaleString(); $('#protein').textContent='~'+t.protein+'g';
+ $('#calBar').style.width=(state.calorieGoal?Math.min(100,t.kcal/state.calorieGoal*100):0)+'%'; $('#proBar').style.width=(state.proteinGoal?Math.min(100,t.protein/state.proteinGoal*100):0)+'%';
  $('#fastBadge').textContent=state.fasting?'☦ Fasting day':'Regular day';
  $('#meals').innerHTML=state.meals.map(m=>`<div class="meal"><div class="meal-icon">🍽️</div><div class="grow"><strong>${m.name}</strong><span class="sub">${m.detail}</span><br><span class="tag">~${m.kcal} kcal · ~${m.protein}g protein · ${m.confidence}</span></div><button class="ghost" onclick="removeMeal(${m.id})">×</button></div>`).join('');
  document.querySelectorAll('[data-floor]').forEach(b=>b.classList.toggle('done',!!state.floor[b.dataset.floor]));
