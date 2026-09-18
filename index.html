@@ -26,6 +26,8 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#08110df2;backdrop-filter:
 <div class="card wide"><div class="label">Daily basics</div><div class="actions">
 <button class="action" data-floor="walk" onclick="toggleFloor('walk')">🚶🏽<br>Walk</button><button class="action" data-floor="strength" onclick="toggleFloor('strength')">🏋🏽<br>Strength</button><button class="action" data-floor="water" onclick="toggleFloor('water')">💧<br>Water</button><button class="action" data-floor="sleep" onclick="toggleFloor('sleep')">🌙<br>Sleep</button></div></div>
 <div class="card wide"><div class="label">Food log</div><div class="daytabs" id="daytabs"></div><div id="daytotal" class="sub"></div><div id="meals"></div><button class="primary" onclick="addMeal()">+ Add meal</button></div>
+<div class="card wide"><div class="label">Weight history</div><div id="weightHistory"></div></div>
+<div class="card wide"><div class="label">4-day summary</div><div id="summary"></div></div>
 <div class="card wide"><div class="label">Notes</div><p class="sub">Meal numbers are estimates. Use the trend, not one meal or one weigh-in.</p><div class="tools"><button class="secondary" onclick="exportData()">Export data</button></div></div>
 </section></main>
 <nav><div class="navin"><span class="active">Today</span><span>Weight</span><span>Meals</span><span>Training</span><span>Trends</span></div></nav>
