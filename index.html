@@ -18,4 +18,28 @@
 <section id="progressView" class="view"><div class="hero"><div class="label">Progress</div><h1>Trends</h1><div class="sub">Weekly averages matter more than a single weigh-in.</div></div><div class="card"><div class="stats" id="trendStats"></div></div><div class="card"><div class="label">Weight</div><div class="chart" id="weightChart"></div></div><div class="card"><div class="label">Daily calories</div><div class="chart" id="calChart"></div><div class="sub">Days without a log are left empty.</div></div><div class="card"><div class="label">Protein by day</div><div class="chart" id="proChart"></div></div><div class="card"><div class="label">Notes</div><textarea rows="5" id="notes" placeholder="Sleep, hunger, energy, ankle, workout…" oninput="saveNotes(this.value)"></textarea></div></section>
 
 <section id="libraryView" class="view"><div class="hero"><div class="label">Library</div><h1>Meals & workouts</h1></div><div class="card"><div class="label">High-protein meal ideas</div><div class="library" id="mealLibrary"></div></div><div class="card"><div class="label">Simple rules</div><p><b>Protein first.</b> Build the meal around a protein source.</p><p><b>Vegetables next.</b> Use them for volume and fiber.</p><p><b>Carbs measured.</b> Keep a useful portion rather than stacking several large starches.</p><p><b>Added fat measured.</b> Nuts, oil, mayo and dressing are useful but calorie-dense.</p><p class="sub">On Orthodox fasting days use tofu, lentils, split peas, chickpeas and other plant foods instead of animal products.</p></div><div class="card"><div class="label">Data</div><div class="row"><button class="btn" onclick="exportData()">Export</button><button class="btn" onclick="importData()">Import</button></div></div></section>
-</main><nav><div class="nav"><span class="active" onclick="go('today',this)">Today</span><span onclick="go('meals',this)">Meals</span><span onclick="go('training',this)">Training</span><span onclick="go('progress',this)">Progress</span><span onclick="go('library',this)">Library</span></div></nav><script src="app.js"></script><script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');</script></body></html>
+</main><nav><div class="nav"><span class="active" onclick="go('today',this)">Today</span><span onclick="go('meals',this)">Meals</span><span onclick="go('training',this)">Training</span><span onclick="go('progress',this)">Progress</span><span onclick="go('library',this)">Library</span></div></nav><script src="app.js?v=12"></script><script>
+if('serviceWorker' in navigator){
+  let refreshing=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(refreshing)return;
+    refreshing=true;
+    location.reload();
+  });
+  window.addEventListener('load',async()=>{
+    try{
+      const reg=await navigator.serviceWorker.register('./sw.js?v=12',{updateViaCache:'none'});
+      await reg.update();
+      if(reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
+      reg.addEventListener('updatefound',()=>{
+        const w=reg.installing;
+        if(!w)return;
+        w.addEventListener('statechange',()=>{
+          if(w.state==='installed' && navigator.serviceWorker.controller)
+            w.postMessage('SKIP_WAITING');
+        });
+      });
+    }catch(e){console.warn('SW update check failed',e)}
+  });
+}
+</script></body></html>
