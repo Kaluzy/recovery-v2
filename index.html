@@ -19,7 +19,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#08110df2;backdrop-filter:
 </style></head><body><main class="app">
 <div class="top"><div class="eyebrow">Recovery · Health Tracker</div><button id="fastBadge" class="badge" onclick="toggleFast()">Regular day</button></div>
 <section class="hero"><h1>Today</h1><p>Weight, food, protein, movement and sleep.</p></section>
-<section class="grid">
+<section class="grid" id="todayView">
 <div class="card wide"><div class="label">Weight</div><div class="big"><span id="weight">201 lb</span></div><div class="sub">First goal 190 · then 170 · goal 163</div><div class="tools"><button class="secondary" onclick="logWeight()">+ Log weight</button></div></div>
 <div class="card"><div class="label">Calories</div><div class="big" id="calories">~0</div><div class="sub">target 1,700–1,800</div><div class="bar"><div id="calBar" class="fill"></div></div></div>
 <div class="card"><div class="label">Protein</div><div class="big" id="protein">~0g</div><div class="sub">target ~120g</div><div class="bar"><div id="proBar" class="fill"></div></div></div>
@@ -29,6 +29,9 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#08110df2;backdrop-filter:
 <div class="card wide"><div class="label">Weight history</div><div id="weightHistory"></div></div>
 <div class="card wide"><div class="label">4-day summary</div><div id="summary"></div></div>
 <div class="card wide"><div class="label">Notes</div><p class="sub">Meal numbers are estimates. Use the trend, not one meal or one weigh-in.</p><div class="tools"><button class="secondary" onclick="exportData()">Export data</button></div></div>
-</section></main>
-<nav><div class="navin"><span class="active">Today</span><span>Weight</span><span>Meals</span><span>Training</span><span>Trends</span></div></nav>
+</section>
+<section id="trainingView" style="display:none;margin-top:12px"><div class="card"><div class="label">Training</div><div class="big">10-minute start</div><p class="sub">Start with 10 minutes. Continue if you want.</p><div class="actions"><button class="action" data-train="walk" onclick="logTraining('Walk')">🚶🏽<br>Walk</button><button class="action" data-train="strength" onclick="logTraining('Strength')">🏋🏽<br>Strength</button><button class="action" data-train="gym" onclick="logTraining('Gym')">🏢<br>Gym</button><button class="action" data-train="home" onclick="logTraining('Home')">🏠<br>Home</button></div><div id="trainingLog" style="margin-top:12px"></div></div></section>
+<section id="trendsView" style="display:none;margin-top:12px"><div class="card"><div class="label">Trends</div><div id="trendStats"></div></div></section>
+</main>
+<nav><div class="navin"><span class="active" onclick="showView('today',this)">Today</span><span onclick="showView('today',this)">Weight</span><span onclick="showView('today',this)">Meals</span><span onclick="showView('training',this)">Training</span><span onclick="showView('trends',this)">Trends</span></div></nav>
 <script src="app.js"></script><script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');</script></body></html>
