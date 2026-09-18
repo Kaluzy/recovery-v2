@@ -1,5 +1,5 @@
 const KEY='recovery-v2-state-v5';
-const seed={version:4,weight:201,goal:163,calorieGoal:1750,proteinGoal:120,fasting:false,selectedDay:4,floor:{walk:false,strength:false,water:false,sleep:false},weights:[{date:'2026-09-17',value:201}],meals:[
+const seed={version:4,weight:201,goal:163,calorieGoal:1750,proteinGoal:120,fasting:false,selectedDay:4,floor:{walk:false,strength:false,water:false,sleep:false},training:[],weights:[{date:'2026-09-17',value:201}],meals:[
 {id:101,day:1,name:'Protein bread + turkey',detail:'2 slices ALDI protein bread, about 5 slices turkey, lots of lettuce/salad.',kcal:330,protein:34,confidence:'estimate'},
 {id:102,day:1,name:'Injera + tibs dinner',detail:'Injera, beef/tibs, shredded lettuce salad with cucumber and onion, 2 tbsp cottage cheese, small doro wot, awaze, water.',kcal:760,protein:43,confidence:'estimate'},
 {id:201,day:2,name:'Zucchini + leftovers',detail:'1 whole zucchini, leftover tibs/beef, 1 drumstick and couscous.',kcal:560,protein:40,confidence:'estimate'},
@@ -15,6 +15,10 @@ function load(){const old=JSON.parse(localStorage.getItem(KEY)||'null');if(!old|
 let state=load(); const save=()=>localStorage.setItem(KEY,JSON.stringify(state)); const $=s=>document.querySelector(s);
 function dayMeals(){return state.meals.filter(m=>m.day===state.selectedDay)}
 function totals(ms=dayMeals()){return ms.reduce((a,m)=>({kcal:a.kcal+(+m.kcal||0),protein:a.protein+(+m.protein||0)}),{kcal:0,protein:0})}
+function ensure(){if(!state.training)state.training=[]} ensure();
+function showView(v,el){['today','training','trends'].forEach(x=>{const n=$('#'+x+'View');if(n)n.style.display=x===v?'grid':'none'});document.querySelectorAll('.navin span').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');render()}
+window.showView=showView;
+window.logTraining=type=>{const mins=Number(prompt(type+' minutes',10)||0);if(!mins)return;state.training.push({id:Date.now(),date:new Date().toISOString().slice(0,10),type,mins});save();render()}
 function render(){
  const t=totals(); $('#weight').textContent=state.weight+' lb'; $('#calories').textContent='~'+t.kcal.toLocaleString(); $('#protein').textContent='~'+t.protein+'g';
  $('#calBar').style.width=Math.min(100,t.kcal/state.calorieGoal*100)+'%'; $('#proBar').style.width=Math.min(100,t.protein/state.proteinGoal*100)+'%';
@@ -25,6 +29,8 @@ function render(){
  const all=totals(state.meals), avgK=Math.round(all.kcal/4), avgP=Math.round(all.protein/4);
  $('#summary').innerHTML='<div class="big">~'+avgK+' kcal/day</div><div class="sub">~'+avgP+'g protein/day average · '+state.meals.length+' logged meals</div>';
  $('#weightHistory').innerHTML=state.weights.slice().reverse().map(w=>'<div class="meal"><div class="grow"><strong>'+w.value+' lb</strong><span class="sub">'+w.date+'</span></div></div>').join('')||'<span class="sub">No weight entries yet.</span>';
+ const tl=$('#trainingLog');if(tl)tl.innerHTML=state.training.slice().reverse().map(x=>'<div class="meal"><div class="grow"><strong>'+x.type+' · '+x.mins+' min</strong><span class="sub">'+x.date+'</span></div></div>').join('')||'<span class="sub">No training logged yet.</span>';
+ const ts=$('#trendStats');if(ts){const allT=state.training.reduce((n,x)=>n+(+x.mins||0),0);ts.innerHTML='<div class="big">'+state.weights[state.weights.length-1].value+' lb</div><div class="sub">Current logged weight</div><div class="big" style="margin-top:16px">'+allT+' min</div><div class="sub">Training logged</div><div class="big" style="margin-top:16px">'+state.meals.length+'</div><div class="sub">Meals logged</div>'}
  document.querySelectorAll('[data-floor]').forEach(b=>b.classList.toggle('done',!!state.floor[b.dataset.floor]));
 }
 window.selectDay=d=>{state.selectedDay=d;save();render()}
