@@ -15,6 +15,7 @@ const seed={version:12,weight:200.8,goal:163,calGoal:1750,proGoal:120,fasting:fa
 ,
 {id:601,day:6,name:'Ethiopian lunch · kitfo, doro & greens',detail:'Kitfo, doro, collard greens with meat and about 1/2 to a little more injera',kcal:850,protein:48},
 {id:602,day:6,name:'California rolls',detail:'2 California sushi rolls',kcal:520,protein:18},
+{id:605,day:6,name:'Turkey sausage + lentil grain bowl',detail:'1 turkey sausage with leftover split peas/lentils/legumes, grain and shredded cheese',kcal:650,protein:32},
 {id:603,day:6,name:'Sweet snacks',detail:'Small pumpkin-spice muffin + 1 ice cream',kcal:350,protein:5},
 {id:604,day:6,name:'Other calories',detail:'Unlisted beverage calories',kcal:300,protein:0},
 {id:701,day:7,name:'Genfo with beef & Greek yogurt',detail:'Genfo with about 2 tbsp cooked minced beef, 1 heaping tbsp Greek yogurt, berbere and mitmita',kcal:620,protein:20}
