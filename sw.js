@@ -1,4 +1,4 @@
-const CACHE='recovery-v3-12';
+const CACHE='recovery-v3-13';
 const CORE=['./','./index.html','./manifest.webmanifest'];
 self.addEventListener('install',e=>{
   self.skipWaiting();
