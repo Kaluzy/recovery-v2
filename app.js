@@ -20,7 +20,9 @@ const seed={version:12,weight:200.8,goal:163,calGoal:1750,proGoal:120,fasting:fa
 {id:604,day:6,name:'Other calories',detail:'Unlisted beverage calories',kcal:300,protein:0},
 {id:701,day:7,name:'Genfo with beef & Greek yogurt',detail:'Genfo with about 2 tbsp cooked minced beef, 1 heaping tbsp Greek yogurt, berbere and mitmita',kcal:620,protein:20},
 {id:702,day:7,name:'Chicken wrap',detail:'Prepped chicken, lettuce/salad, cottage cheese, light mayo, hot sauce and a little shredded Mexican cheese in a large tortilla',kcal:520,protein:45},
-{id:801,day:8,name:'Genfo protein bowl',detail:'Leftover genfo with prepped chicken cubes, cottage cheese, about 1 scoop doro wot and meat',kcal:700,protein:48}
+{id:801,day:8,name:'Genfo protein bowl',detail:'Leftover genfo with prepped chicken cubes, cottage cheese, about 1 scoop doro wot and meat',kcal:700,protein:48},
+{id:802,day:8,name:'Injera + doro wot + salad',detail:'About 1/2 injera, a little doro wot and salad',kcal:430,protein:20},
+{id:901,day:9,name:'Chicken + green beans',detail:'About 1/2 cup cubed prepped chicken with a large serving of green/string beans',kcal:300,protein:32}
 ]};
 const foods={tuna:{name:'Tuna crunch bowl',detail:'Tuna in water + large salad + light dressing',kcal:350,protein:35},chicken:{name:'Chicken vegetable plate',detail:'Chicken breast + vegetables + small starch portion',kcal:500,protein:45},fast:{name:'Fasting protein bowl',detail:'Tofu + lentils + vegetables + measured oil',kcal:500,protein:30},sub:{name:'Tuna sub',detail:'Multigrain bread + tuna + light mayo + cottage cheese + vegetables',kcal:575,protein:40},sardine:{name:'Sardine legume bowl',detail:'Legumes/chickpeas + sardines + vegetables',kcal:600,protein:42},cottage:{name:'Cottage cheese plate',detail:'Low-fat cottage cheese + vegetables + protein bread',kcal:380,protein:35}};
 
