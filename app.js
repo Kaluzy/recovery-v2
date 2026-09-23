@@ -23,7 +23,8 @@ const seed={version:12,weight:200.8,goal:163,calGoal:1750,proGoal:120,fasting:fa
 {id:801,day:8,name:'Genfo protein bowl',detail:'Leftover genfo with prepped chicken cubes, cottage cheese, about 1 scoop doro wot and meat',kcal:700,protein:48},
 {id:802,day:8,name:'Injera + doro wot + salad',detail:'About 1/2 injera, a little doro wot and salad',kcal:430,protein:20},
 {id:901,day:9,name:'Chicken + green beans + couscous',detail:'About 1 cup cubed prepped chicken, a large serving of green/string beans and about 1/2 cup couscous',kcal:520,protein:58},
-{id:902,day:9,name:'Filthy Cabbage bowl',detail:'Cabbage and mixed vegetables with about 1 cup lean beef, 2 tomato-basil chicken sausages and about 1 tbsp cottage cheese',kcal:850,protein:65}
+{id:902,day:9,name:'Filthy Cabbage bowl',detail:'Cabbage and mixed vegetables with about 1 cup lean beef, 2 tomato-basil chicken sausages and about 1 tbsp cottage cheese',kcal:850,protein:65},
+{id:1001,day:10,name:'Tofu + yellow split peas',detail:'About 1/2 pack ALDI tofu with cooked yellow split peas and garlic & herb nuts (not blended)',kcal:650,protein:36}
 ]};
 const foods={tuna:{name:'Tuna crunch bowl',detail:'Tuna in water + large salad + light dressing',kcal:350,protein:35},chicken:{name:'Chicken vegetable plate',detail:'Chicken breast + vegetables + small starch portion',kcal:500,protein:45},fast:{name:'Fasting protein bowl',detail:'Tofu + lentils + vegetables + measured oil',kcal:500,protein:30},sub:{name:'Tuna sub',detail:'Multigrain bread + tuna + light mayo + cottage cheese + vegetables',kcal:575,protein:40},sardine:{name:'Sardine legume bowl',detail:'Legumes/chickpeas + sardines + vegetables',kcal:600,protein:42},cottage:{name:'Cottage cheese plate',detail:'Low-fat cottage cheese + vegetables + protein bread',kcal:380,protein:35}};
 
